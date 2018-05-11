@@ -9,11 +9,48 @@ var config = {
   };
   firebase.initializeApp(config);
 
-// Assumptions
-var tFrequency = 3;
 
-// Time is 3:30 AM
-var firstTime = "03:30";
+// Form Submit
+
+// Capture Button Click
+$("#inputName").on("click", function(event) {
+// prevent page from refreshing when form tries to submit itself
+event.preventDefault();
+
+// Capture user inputs and store them into variables
+var name = $("#inputName").val().trim();
+var destination = $("#inputDestination").val().trim();
+var firstTime = $("#inputTime").val().trim();
+var frequency = $("#inputFrequency").val().trim();
+
+// Console log each of the user inputs to confirm we are receiving them
+console.log(name);
+console.log(destination);
+console.log(firstTime);
+console.log(frequency);
+
+// Replaces the content in the "recent-member" div with the new info
+$("#inputName").text(name);
+$("#inputDestination").text(destination);
+$("#inputTime").text(firstTime);
+$("#inputFrequency").text(frequency);
+
+// Clear localStorage
+localStorage.clear();
+
+// Store all content into localStorage
+localStorage.setItem("name", name);
+localStorage.setItem("destination", destination);
+localStorage.setItem("time", time);
+localStorage.setItem("frequency", frequency);
+});
+
+// By default display the content from localStorage
+// $("#name-display").text(localStorage.getItem("name"));
+// $("#email-display").text(localStorage.getItem("email"));
+// $("#age-display").text(localStorage.getItem("age"));
+// $("#comment-display").text(localStorage.getItem("comment"));
+
 
 // First Time (pushed back 1 year to make sure it comes before current time)
 var firstTimeConverted = moment(firstTime, "HH:mm").subtract(1, "years");
